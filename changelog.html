@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mini Karaoke version history and release notes.">
+  <title>Version History | Mini Karaoke</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #071426;
+      --panel: #10233d;
+      --panel2: #142b49;
+      --text: #f4f8ff;
+      --muted: #b7c6da;
+      --accent: #35d07f;
+      --line: rgba(255,255,255,.10);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: radial-gradient(circle at top, #17375b 0, var(--bg) 52%);
+      line-height: 1.65;
+    }
+    header {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(7,20,38,.78);
+    }
+    .bar {
+      width: min(900px, 100%);
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+    .brand { font-size: 1.08rem; font-weight: 800; }
+    .brand span { color: var(--accent); }
+    a { color: var(--accent); }
+    .back {
+      text-decoration: none;
+      font-weight: 700;
+      border: 1px solid rgba(53,208,127,.45);
+      border-radius: 999px;
+      padding: 9px 15px;
+      white-space: nowrap;
+    }
+    .back:hover { background: rgba(53,208,127,.12); }
+    main { width: min(820px, calc(100% - 32px)); margin: 42px auto; }
+    .intro {
+      text-align: center;
+      padding: 30px 22px;
+      background: linear-gradient(145deg, rgba(20,43,73,.96), rgba(12,30,52,.96));
+      border: 1px solid var(--line);
+      border-radius: 22px;
+    }
+    .eyebrow {
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: .78rem;
+      font-weight: 800;
+      margin: 0 0 6px;
+    }
+    h1 { font-size: clamp(2rem, 6vw, 2.7rem); line-height: 1.15; margin: 0; }
+    .intro p:last-child { color: var(--muted); margin: 12px 0 0; }
+    .timeline { position: relative; margin: 28px 0 0 12px; padding-left: 28px; }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 8px; bottom: 8px; left: 5px;
+      width: 2px;
+      background: rgba(53,208,127,.38);
+    }
+    .release {
+      position: relative;
+      padding: 21px;
+      margin-bottom: 18px;
+      background: rgba(16,35,61,.94);
+      border: 1px solid var(--line);
+      border-radius: 17px;
+    }
+    .release::before {
+      content: "";
+      position: absolute;
+      left: -30px; top: 27px;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 3px solid var(--bg);
+      box-shadow: 0 0 0 2px rgba(53,208,127,.35);
+    }
+    .release-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    h2 { margin: 0; font-size: 1.35rem; }
+    .status {
+      font-size: .76rem;
+      font-weight: 800;
+      letter-spacing: .5px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      color: #dfffee;
+      background: rgba(53,208,127,.13);
+      border: 1px solid rgba(53,208,127,.3);
+    }
+    .date { color: #91a5bf; font-size: .9rem; margin: 0 0 12px; }
+    .release p { color: var(--muted); margin: 0; }
+    .release ul { color: var(--muted); margin: 9px 0 0; padding-left: 20px; }
+    .note {
+      padding: 16px 18px;
+      background: rgba(20,43,73,.72);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      color: var(--muted);
+      font-size: .92rem;
+      margin-top: 22px;
+    }
+    footer { text-align: center; color: #91a5bf; padding: 22px 16px 36px; font-size: .9rem; }
+    @media (max-width: 560px) {
+      main { margin: 26px auto; }
+      .bar { align-items: flex-start; }
+      .release { padding: 17px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="bar">
+      <div class="brand">MINI <span>KARAOKE</span></div>
+      <a class="back" href="index.html">← Back to Home</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="intro">
+      <p class="eyebrow">What's new?</p>
+      <h1>Version History</h1>
+      <p>Follow the Mini Karaoke updates and improvements.</p>
+    </section>
+
+    <section class="timeline" aria-label="Mini Karaoke releases">
+      <article class="release">
+        <div class="release-head">
+          <h2>Version 1.14.4</h2>
+          <span class="status">Release listed</span>
+        </div>
+        <p class="date">Release date: To be confirmed</p>
+        <p>This version is listed as an available Mini Karaoke release. Detailed changes have not yet been added.</p>
+      </article>
+
+      <article class="release">
+        <div class="release-head">
+          <h2>Version 1.14.5</h2>
+          <span class="status">In development</span>
+        </div>
+        <p class="date">Release date: Not released yet</p>
+        <p>Development and improvement work is ongoing. This entry will be updated when the version is ready for release.</p>
+      </article>
+    </section>
+
+    <aside class="note">
+      <strong>Release notes:</strong> This page will be updated as confirmed version details become available. Dates and feature lists are intentionally left unconfirmed rather than guessed.
+    </aside>
+  </main>
+
+  <footer>© <span id="year"></span> Jeric Langco · Mini Karaoke</footer>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
