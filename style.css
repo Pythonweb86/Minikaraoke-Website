@@ -81,3 +81,54 @@ footer{padding:30px 0 40px;text-align:center;color:#7f8aa5;font-size:12px;border
   .pill{font-size:9px;padding:4px 7px}
   nav a{font-size:12px}
 }
+
+
+/* ==========================================
+   MOBILE POLISH — appended without replacing
+   or removing any of the original styles
+========================================== */
+
+@media (max-width: 700px) {
+  header {
+    align-items: flex-start;
+  }
+
+  .brand {
+    min-width: 0;
+    max-width: 100%;
+    flex-wrap: wrap;
+    overflow-wrap: anywhere;
+  }
+
+  .brand > span:last-child {
+    min-width: 0;
+  }
+
+  nav {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .panel-top {
+    flex-wrap: wrap;
+  }
+
+  .panel-top > span:first-child {
+    flex: 1 1 180px;
+    overflow-wrap: anywhere;
+  }
+
+  .pill {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 360px) {
+  .brand {
+    font-size: 14px;
+  }
+
+  .panel-top {
+    font-size: 10px;
+  }
+}
