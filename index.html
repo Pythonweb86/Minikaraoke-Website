@@ -1,6 +1,97 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#080b16"><meta name="author" content="Jeric Langco"><meta name="description" content="Mini Karaoke official project website. Download information, release notes and installation help."><title>Mini Karaoke | Official Project Website</title><link rel="stylesheet" href="style.css"></head><body><div class="wrap"><header><a class="brand" href="index.html"><span class="logo">🎤</span><span>MINI KARAOKE<small>OFFICIAL PROJECT WEBSITE</small></span></a><nav aria-label="Main navigation"><a href="index.html">Home</a><a href="index.html#download">Download</a><a href="changelog.html">What's New</a><a href="features.html">Features</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></header><main><section class="hero"><span class="eyebrow">♪ ANDROID KARAOKE PROJECT</span><h1>Your music.<br><span class="gradient">Your moment.</span></h1><p class="lead">Discover Mini Karaoke, check the latest available Android release, and find helpful information about the project.</p><div class="panel" id="download"><div class="panel-top"><span>MINI KARAOKE · ANDROID APK</span><span class="pill">RELEASE CHECK</span></div><div class="version">Latest release: <strong id="version">Checking GitHub…</strong></div><a class="download" id="downloadButton" href="https://github.com/jericlangco/Minikaraoke-Update/releases/latest" target="_blank" rel="noopener">↓ Download Latest APK</a><div class="status" id="status" aria-live="polite">Checking the latest published release…</div><div class="small">Download availability depends on the assets published in GitHub Releases.</div></div><div class="author"><img class="author-photo" src="author.jpg" alt="Jeric Langco"><div><div class="author-label">Created and maintained by</div><div class="author-name">Jeric Langco</div></div></div></section>
-<section class="section"><div class="section-head"><h2>Everything in one place</h2><p>Quick access to Mini Karaoke project information.</p></div><div class="grid"><article class="card"><div class="ico">📥</div><h3>APK Download</h3><p>Open the latest published release and find its Android APK asset.</p></article><article class="card"><div class="ico">✨</div><h3>Release History</h3><p>Review the version information and confirmed release notes.</p></article><article class="card"><div class="ico">📱</div><h3>Installation Guide</h3><p>Follow the basic steps for installing an APK on Android.</p></article></div></section>
-<section class="section"><div class="section-head"><h2>How to install</h2><p>A simple guide for Android devices.</p></div><ol class="steps"><li>Tap the Download Latest APK button.</li><li>On GitHub, open the latest release and locate the APK under Assets.</li><li>Download the APK to your device.</li><li>Open the downloaded file. If Android asks, allow your file manager or browser to install unknown apps.</li><li>Return to the installer and follow Android's prompts.</li></ol><p class="small">Only install APK files from sources you trust. Android may show security warnings for apps installed outside Google Play.</p></section>
-<section class="section"><div class="section-head"><h2>Explore the project</h2><p>Learn more about the app and its creator.</p></div><p><a class="text-link" href="changelog.html">View version history</a> · <a class="text-link" href="features.html">Explore project information</a> · <a class="text-link" href="about.html">Meet the developer</a></p></section></main><footer>© <span data-year></span> Mini Karaoke · Website by Jeric Langco</footer><script src="site.js"></script></div><script>
-(async()=>{const version=document.getElementById('version'),button=document.getElementById('downloadButton'),status=document.getElementById('status');const releases='https://github.com/jericlangco/Minikaraoke-Update/releases/latest';try{const r=await fetch('https://api.github.com/repos/jericlangco/Minikaraoke-Update/releases/latest',{headers:{Accept:'application/vnd.github+json'}});if(!r.ok)throw Error('No published release found');const data=await r.json();version.textContent=data.tag_name||data.name||'Latest';const apk=(data.assets||[]).find(a=>a.name&&a.name.toLowerCase().endsWith('.apk'));if(apk&&apk.browser_download_url){button.href=apk.browser_download_url;button.textContent='↓ Download '+(data.tag_name||'Latest')+' APK';status.textContent='A published APK asset was found.'}else{button.href=releases;status.textContent='Release found, but no APK asset was detected. Check the release Assets.'}}catch(e){version.textContent='See GitHub Releases';button.href=releases;status.textContent='Automatic release check unavailable. Open GitHub Releases to view available downloads.'}})();
-</script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080313">
+  <meta name="author" content="Jeric Langco">
+  <meta name="description" content="Mini Karaoke — sing anytime, anywhere. Get the latest Android APK, updates and project information.">
+  <title>Mini Karaoke | Sing Anytime, Anywhere</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="site-shell">
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Mini Karaoke home">
+        <span class="brand-mark" aria-hidden="true">🎤</span>
+        <span class="brand-copy"><strong>Mini Karaoke</strong><small>Sing Anytime, Anywhere!</small></span>
+      </a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a class="active" href="index.html">⌂ <span>Home</span></a>
+        <a href="#download">⇩ <span>Download</span></a>
+        <a href="changelog.html">★ <span>What's New</span></a>
+        <a href="features.html">⚙ <span>Features</span></a>
+        <a href="about.html">♙ <span>About</span></a>
+        <a href="contact.html">✉ <span>Contact</span></a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero-stage">
+        <div class="hero-copy">
+          <span class="eyebrow"><span class="pulse-dot"></span> ANDROID KARAOKE PROJECT</span>
+          <h1>Mini <span class="gold-word">Karaoke</span></h1>
+          <p class="tagline">Your music. <span>Your moment.</span></p>
+          <p class="hero-description">Bring the music wherever you go. Discover Mini Karaoke, check the latest release, and get ready to sing along.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#download">♫ Get Mini Karaoke</a>
+            <a class="button button-ghost" href="features.html">Explore the project <span>→</span></a>
+          </div>
+          <div class="hero-note">♪ Your favorite songs are only a tap away.</div>
+        </div>
+
+        <div class="stage-art" aria-label="Neon karaoke microphone artwork">
+          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+          <span class="music-note note-one">♫</span><span class="music-note note-two">♪</span>
+          <div class="stage-glow"></div>
+          <div class="mic-disc"><span class="mic-icon">🎤</span></div>
+          <div class="sound-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <span class="stage-caption">TURN UP THE MOMENT</span>
+        </div>
+
+        <aside class="download-panel" id="download">
+          <div class="download-panel-head"><span class="app-icon">🎶</span><div><span class="panel-kicker">OFFICIAL ANDROID APP</span><h2>Mini Karaoke APK</h2><p>Latest available release</p></div></div>
+          <div class="release-line"><span class="live-dot"></span><span>Latest version</span><strong id="version">Checking GitHub…</strong></div>
+          <ul class="benefit-list"><li>Thousands of songs</li><li>Made for Android</li><li>Easy access to updates</li></ul>
+          <a class="button button-download" id="downloadButton" href="https://github.com/jericlangco/Minikaraoke-Update/releases/latest" target="_blank" rel="noopener">⇩ <span>Download Latest APK</span></a>
+          <p class="download-status" id="status" aria-live="polite">Checking the latest published release…</p>
+          <p class="panel-foot">APK availability depends on assets published in GitHub Releases.</p>
+        </aside>
+      </section>
+
+      <section class="quick-stats" aria-label="Project highlights">
+        <div><span class="stat-icon pink">♫</span><strong>Music</strong><small>Made for karaoke fans</small></div>
+        <div><span class="stat-icon blue">✦</span><strong>Simple</strong><small>Easy project access</small></div>
+        <div><span class="stat-icon green">✓</span><strong>Updates</strong><small>Release information</small></div>
+        <div><span class="stat-icon orange">▣</span><strong>Android</strong><small>APK download center</small></div>
+      </section>
+
+      <section class="info-grid">
+        <article class="info-card about-card">
+          <div class="card-heading"><span class="card-icon">✦</span><h2>About Mini Karaoke</h2></div>
+          <p>Mini Karaoke is an Android karaoke project bringing music and technology together. Visit the project pages to learn more.</p>
+          <a class="text-button" href="about.html">Learn more <span>→</span></a>
+        </article>
+        <article class="info-card updates-card">
+          <div class="card-heading"><span class="card-icon">★</span><h2>Latest Updates</h2></div>
+          <p>Follow confirmed release information and version history for Mini Karaoke.</p>
+          <a class="text-button" href="changelog.html">View changelog <span>→</span></a>
+        </article>
+        <article class="info-card creator-card">
+          <div class="card-heading"><span class="card-icon">✉</span><h2>Developer</h2></div>
+          <div class="creator-row"><img src="author.jpg" alt="Jeric Langco" class="creator-photo"><div><strong>Jeric Langco</strong><small>Website creator</small></div></div>
+          <a class="text-button" href="contact.html">Get in touch <span>→</span></a>
+        </article>
+      </section>
+
+      <section class="install-strip">
+        <div><span class="eyebrow">READY TO SING?</span><h2>Start your Mini Karaoke journey.</h2><p>Open the latest GitHub release and check its APK assets before installing.</p></div>
+        <a class="button button-primary" href="https://github.com/jericlangco/Minikaraoke-Update/releases/latest" target="_blank" rel="noopener">Open latest release ↗</a>
+      </section>
+    </main>
+
+    <footer class="site-footer"><div class="footer-equalizer" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><p>© <span data-year></span> Mini Karaoke. All rights reserved. <span class="footer-credit">♥ Developed by <strong>Jeric Langco</strong></span></p><div class="footer-links"><a href="https://github.com/jericlangco/Minikaraoke-Website" target="_blank" rel="noopener" aria-label="Website GitHub">GitHub</a><a href="https://github.com/jericlangco/Minikaraoke-Update" target="_blank" rel="noopener" aria-label="Mini Karaoke updates">Updates</a></div></footer>
+  </div>
+  <script src="site.js"></script>
+</body>
+</html>
