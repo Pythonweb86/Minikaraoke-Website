@@ -52,6 +52,21 @@
 <div class="small">The APK downloads from GitHub Releases. Android will ask you to confirm installation after downloading.</div>
 </div>
 </section>
+<section class="section screenshot-gallery" id="screenshots" aria-labelledby="gallery-title">
+<div class="section-head"><h2 id="gallery-title">Mini Karaoke in action</h2><p>Take a closer look at the app's library, settings and karaoke player.</p></div>
+<div class="gallery-grid">
+  <button class="gallery-item gallery-tall" type="button" data-gallery-src="assets/gallery-library.jpg" data-gallery-alt="Mini Karaoke song library showing the loaded song list"><img src="assets/gallery-library.jpg" alt="Mini Karaoke song library" loading="lazy"><span class="gallery-caption"><strong>Song Library</strong><small>Browse your karaoke collection</small></span></button>
+  <button class="gallery-item gallery-tall" type="button" data-gallery-src="assets/gallery-search.jpg" data-gallery-alt="Mini Karaoke song search results"><img src="assets/gallery-search.jpg" alt="Mini Karaoke song search" loading="lazy"><span class="gallery-caption"><strong>Song Search</strong><small>Find songs quickly</small></span></button>
+  <button class="gallery-item gallery-tall" type="button" data-gallery-src="assets/gallery-settings.jpg" data-gallery-alt="Mini Karaoke settings screen"><img src="assets/gallery-settings.jpg" alt="Mini Karaoke settings" loading="lazy"><span class="gallery-caption"><strong>App Settings</strong><small>Personalize your experience</small></span></button>
+  <button class="gallery-item gallery-tall" type="button" data-gallery-src="assets/gallery-player.jpg" data-gallery-alt="Mini Karaoke portrait player with lyrics and controls"><img src="assets/gallery-player.jpg" alt="Mini Karaoke portrait karaoke player" loading="lazy"><span class="gallery-caption"><strong>Karaoke Player</strong><small>Lyrics and playback controls</small></span></button>
+  <button class="gallery-item gallery-wide" type="button" data-gallery-src="assets/gallery-landscape.jpg" data-gallery-alt="Mini Karaoke landscape lyrics playback screen"><img src="assets/gallery-landscape.jpg" alt="Mini Karaoke landscape lyrics screen" loading="lazy"><span class="gallery-caption"><strong>Landscape Lyrics</strong><small>Enjoy karaoke on a wider screen</small></span></button>
+</div>
+</section>
+<div class="gallery-lightbox" id="galleryLightbox" hidden role="dialog" aria-modal="true" aria-label="Screenshot preview">
+  <button class="gallery-close" type="button" aria-label="Close screenshot preview">×</button>
+  <img id="galleryPreview" src="" alt="">
+  <p class="gallery-help">Tap outside the image or press Escape to close</p>
+</div>
 <section class="section">
 <div class="section-head"><h2>Everything in one place</h2><p>Quick access to Mini Karaoke project information.</p></div>
 <div class="grid">
@@ -74,7 +89,27 @@
 </section>
 </main>
 <footer>© <span data-year></span> Mini Karaoke · Website by Jeric Langco</footer>
-<script src="site.js"></script>
+<script>
+(() => {
+  const year = document.querySelector('[data-year]');
+  if (year) year.textContent = new Date().getFullYear();
+  const lightbox = document.getElementById('galleryLightbox');
+  const preview = document.getElementById('galleryPreview');
+  const close = lightbox && lightbox.querySelector('.gallery-close');
+  if (!lightbox || !preview || !close) return;
+  const closeBox = () => { lightbox.hidden = true; preview.removeAttribute('src'); document.body.classList.remove('gallery-open'); };
+  document.querySelectorAll('[data-gallery-src]').forEach(item => item.addEventListener('click', () => {
+    preview.src = item.dataset.gallerySrc;
+    preview.alt = item.dataset.galleryAlt || 'Mini Karaoke screenshot';
+    lightbox.hidden = false;
+    document.body.classList.add('gallery-open');
+    close.focus();
+  }));
+  close.addEventListener('click', closeBox);
+  lightbox.addEventListener('click', event => { if (event.target === lightbox) closeBox(); });
+  document.addEventListener('keydown', event => { if (event.key === 'Escape' && !lightbox.hidden) closeBox(); });
+})();
+</script>
 </div>
 </body>
 </html>

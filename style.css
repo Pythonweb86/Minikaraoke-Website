@@ -588,3 +588,25 @@ footer::after {
     animation: none !important;
   }
 }
+
+
+/* Mini Karaoke screenshot gallery — additive styles */
+.screenshot-gallery { overflow: hidden; }
+.gallery-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.gallery-item { position: relative; display: block; width: 100%; min-width: 0; padding: 0; overflow: hidden; border: 1px solid rgba(85,230,255,.22); border-radius: 16px; background: #0b1022; color: inherit; text-align: left; cursor: zoom-in; box-shadow: 0 8px 26px rgba(0,0,0,.22); transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; }
+.gallery-item:hover, .gallery-item:focus-visible { transform: translateY(-4px); border-color: var(--cyan, #55e6ff); box-shadow: 0 0 0 1px rgba(85,230,255,.22), 0 0 22px rgba(85,230,255,.16); outline: none; }
+.gallery-item img { display: block; width: 100%; height: 300px; object-fit: cover; object-position: top center; }
+.gallery-item.gallery-wide { grid-column: span 2; }
+.gallery-item.gallery-wide img { height: 300px; object-fit: cover; object-position: center; }
+.gallery-caption { position: absolute; inset: auto 0 0; display: flex; flex-direction: column; gap: 4px; padding: 34px 14px 13px; color: #fff; background: linear-gradient(transparent, rgba(4,7,20,.94)); }
+.gallery-caption strong { font-size: 14px; }
+.gallery-caption small { color: rgba(255,255,255,.76); font-size: 11px; }
+.gallery-lightbox[hidden] { display: none; }
+.gallery-lightbox { position: fixed; z-index: 9999; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 24px; background: rgba(3,5,15,.94); backdrop-filter: blur(12px); }
+.gallery-lightbox img { display: block; max-width: min(94vw, 1000px); max-height: 82vh; width: auto; height: auto; object-fit: contain; border: 1px solid rgba(85,230,255,.3); border-radius: 12px; box-shadow: 0 0 30px rgba(85,230,255,.12); }
+.gallery-close { position: absolute; top: 18px; right: 22px; width: 44px; height: 44px; border: 1px solid rgba(255,255,255,.3); border-radius: 50%; background: rgba(18,23,43,.9); color: #fff; font-size: 30px; line-height: 1; cursor: pointer; }
+.gallery-help { margin: 0; color: rgba(255,255,255,.68); font-size: 12px; text-align: center; }
+body.gallery-open { overflow: hidden; }
+@media (max-width: 800px) { .gallery-grid { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; } .gallery-item img, .gallery-item.gallery-wide img { height: 260px; } }
+@media (max-width: 480px) { .gallery-grid { gap: 10px; } .gallery-item img, .gallery-item.gallery-wide img { height: 230px; } .gallery-caption { padding: 28px 10px 10px; } .gallery-caption strong { font-size: 12px; } .gallery-caption small { font-size: 10px; } }
+@media (prefers-reduced-motion: reduce) { .gallery-item { transition: none; } .gallery-item:hover, .gallery-item:focus-visible { transform: none; } }
