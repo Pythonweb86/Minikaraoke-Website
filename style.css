@@ -610,3 +610,65 @@ body.gallery-open { overflow: hidden; }
 @media (max-width: 800px) { .gallery-grid { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; } .gallery-item img, .gallery-item.gallery-wide img { height: 260px; } }
 @media (max-width: 480px) { .gallery-grid { gap: 10px; } .gallery-item img, .gallery-item.gallery-wide img { height: 230px; } .gallery-caption { padding: 28px 10px 10px; } .gallery-caption strong { font-size: 12px; } .gallery-caption small { font-size: 10px; } }
 @media (prefers-reduced-motion: reduce) { .gallery-item { transition: none; } .gallery-item:hover, .gallery-item:focus-visible { transform: none; } }
+
+
+/* Automatic GitHub latest-release tracker — additive styles */
+.release-meta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 20px 0 4px;
+}
+.release-meta > div {
+  min-width: 0;
+  padding: 12px 10px;
+  border: 1px solid #55e6ff25;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #ffffff08, #55e6ff08);
+}
+.release-meta span {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .12em;
+}
+.release-meta strong {
+  display: block;
+  overflow-wrap: anywhere;
+  color: var(--text);
+  font-size: 12px;
+}
+.release-notes-wrap {
+  margin: 15px 0 12px;
+  padding: 14px 16px;
+  border: 1px solid #a78bfa35;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #a78bfa0c, #55e6ff08);
+  text-align: left;
+}
+.release-notes-title {
+  margin-bottom: 7px;
+  color: var(--cyan);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .16em;
+}
+.release-notes {
+  max-height: 180px;
+  overflow: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+@media (max-width: 520px) {
+  .release-meta { gap: 7px; }
+  .release-meta > div { padding: 10px 8px; }
+  .release-meta strong { font-size: 11px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .release-meta > div { transition: none; }
+}

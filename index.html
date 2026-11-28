@@ -45,11 +45,17 @@
 <h1>Your music.<br><span class="gradient">Your moment.</span></h1>
 <p class="lead">Discover Mini Karaoke, download the latest Android release, and find helpful information about the project.</p>
 <div class="panel" id="download">
-<div class="panel-top"><span>MINI KARAOKE · ANDROID APK</span><span class="pill">DIRECT DOWNLOAD</span></div>
-<div class="version">Latest release: <strong id="version">v1.14.4</strong></div>
-<a class="download" id="downloadButton" href="https://github.com/jericlangco/Minikaraoke-Update/releases/download/1.14.4/Mini_Karaoke_1.14.4.apk">↓ Download APK</a>
-<div class="status" id="status" aria-live="polite">Ready to download the latest published APK.</div>
-<div class="small">The APK downloads from GitHub Releases. Android will ask you to confirm installation after downloading.</div>
+<div class="panel-top"><span>MINI KARAOKE · ANDROID APK</span><span class="pill" id="releaseBadge">CHECKING RELEASE</span></div>
+<div class="version">Latest release: <strong id="version">Checking…</strong></div>
+<div class="release-meta" aria-label="Latest APK details">
+  <div><span>RELEASE DATE</span><strong id="releaseDate">Checking…</strong></div>
+  <div><span>APK FILE SIZE</span><strong id="fileSize">Checking…</strong></div>
+  <div><span>DOWNLOAD</span><strong id="assetName">Checking…</strong></div>
+</div>
+<a class="download" id="downloadButton" href="https://github.com/jericlangco/Minikaraoke-Update/releases/latest" target="_blank" rel="noopener">↓ Open Latest GitHub Release</a>
+<div class="status" id="status" aria-live="polite">Loading the latest published release from GitHub…</div>
+<div class="release-notes-wrap"><div class="release-notes-title">WHAT’S NEW</div><div class="release-notes" id="releaseNotes">Release notes will appear here when available.</div></div>
+<div class="small">Release information is retrieved automatically from jericlangco/Minikaraoke-Update. Android will ask you to confirm installation after downloading.</div>
 </div>
 </section>
 <section class="section screenshot-gallery" id="screenshots" aria-labelledby="gallery-title">
@@ -93,21 +99,81 @@
 (() => {
   const year = document.querySelector('[data-year]');
   if (year) year.textContent = new Date().getFullYear();
+
+  // Screenshot gallery preview
   const lightbox = document.getElementById('galleryLightbox');
   const preview = document.getElementById('galleryPreview');
   const close = lightbox && lightbox.querySelector('.gallery-close');
-  if (!lightbox || !preview || !close) return;
-  const closeBox = () => { lightbox.hidden = true; preview.removeAttribute('src'); document.body.classList.remove('gallery-open'); };
-  document.querySelectorAll('[data-gallery-src]').forEach(item => item.addEventListener('click', () => {
-    preview.src = item.dataset.gallerySrc;
-    preview.alt = item.dataset.galleryAlt || 'Mini Karaoke screenshot';
-    lightbox.hidden = false;
-    document.body.classList.add('gallery-open');
-    close.focus();
-  }));
-  close.addEventListener('click', closeBox);
-  lightbox.addEventListener('click', event => { if (event.target === lightbox) closeBox(); });
-  document.addEventListener('keydown', event => { if (event.key === 'Escape' && !lightbox.hidden) closeBox(); });
+  if (lightbox && preview && close) {
+    const closeBox = () => { lightbox.hidden = true; preview.removeAttribute('src'); document.body.classList.remove('gallery-open'); };
+    document.querySelectorAll('[data-gallery-src]').forEach(item => item.addEventListener('click', () => {
+      preview.src = item.dataset.gallerySrc;
+      preview.alt = item.dataset.galleryAlt || 'Mini Karaoke screenshot';
+      lightbox.hidden = false;
+      document.body.classList.add('gallery-open');
+      close.focus();
+    }));
+    close.addEventListener('click', closeBox);
+    lightbox.addEventListener('click', event => { if (event.target === lightbox) closeBox(); });
+    document.addEventListener('keydown', event => { if (event.key === 'Escape' && !lightbox.hidden) closeBox(); });
+  }
+})();
+
+// Automatically display the latest stable GitHub release and its APK asset.
+(async () => {
+  const repoApi = 'https://api.github.com/repos/jericlangco/Minikaraoke-Update/releases/latest';
+  const releasesPage = 'https://github.com/jericlangco/Minikaraoke-Update/releases/latest';
+  const byId = id => document.getElementById(id);
+  const formatDate = value => {
+    if (!value) return 'Not listed';
+    const date = new Date(value);
+    return Number.isNaN(date.getTime()) ? 'Not listed' : date.toLocaleDateString(undefined, {year:'numeric', month:'short', day:'numeric'});
+  };
+  const formatSize = bytes => {
+    if (!Number.isFinite(bytes) || bytes <= 0) return 'Not listed';
+    const units = ['B', 'KB', 'MB', 'GB'];
+    let size = bytes, unit = 0;
+    while (size >= 1024 && unit < units.length - 1) { size /= 1024; unit++; }
+    return size.toFixed(unit === 0 ? 0 : 2) + ' ' + units[unit];
+  };
+  const fallback = message => {
+    byId('version').textContent = 'See latest release';
+    byId('releaseDate').textContent = 'Unavailable';
+    byId('fileSize').textContent = 'Unavailable';
+    byId('assetName').textContent = 'Open GitHub';
+    byId('downloadButton').href = releasesPage;
+    byId('downloadButton').textContent = '↓ Open Latest GitHub Release';
+    byId('releaseBadge').textContent = 'VIEW ON GITHUB';
+    byId('status').textContent = message;
+    byId('releaseNotes').textContent = 'Open the GitHub release page to read the published notes.';
+  };
+  try {
+    const response = await fetch(repoApi, {headers:{Accept:'application/vnd.github+json'}});
+    if (!response.ok) throw new Error(response.status === 404 ? 'No published stable release was found.' : 'GitHub release information is temporarily unavailable.');
+    const release = await response.json();
+    const tag = release.tag_name || release.name || 'Latest';
+    const assets = Array.isArray(release.assets) ? release.assets : [];
+    const apk = assets.find(asset => typeof asset.name === 'string' && asset.name.toLowerCase().endsWith('.apk'));
+    byId('version').textContent = tag;
+    byId('releaseDate').textContent = formatDate(release.published_at || release.created_at);
+    byId('releaseBadge').textContent = release.prerelease ? 'PRE-RELEASE' : 'LATEST RELEASE';
+    byId('releaseNotes').textContent = (release.body || '').trim() || 'No release notes were provided for this version.';
+    if (apk && apk.browser_download_url) {
+      byId('fileSize').textContent = formatSize(apk.size);
+      byId('assetName').textContent = apk.name;
+      byId('downloadButton').href = apk.browser_download_url;
+      byId('downloadButton').textContent = '↓ Download ' + tag + ' APK';
+      byId('status').textContent = 'Latest APK is available on GitHub Releases.';
+    } else {
+      byId('fileSize').textContent = 'No APK asset';
+      byId('assetName').textContent = 'Not found';
+      byId('downloadButton').href = releasesPage;
+      byId('downloadButton').textContent = 'Open Latest GitHub Release';
+      byId('status').textContent = 'The latest release exists, but no APK asset was found. Check its Assets on GitHub.';
+    }
+  } catch (error) {
+    fallback((error && error.message ? error.message : 'Could not load GitHub release information.') + ' Use the GitHub Releases link to check manually.');
+  }
 })();
 </script>
 </div>
