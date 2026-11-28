@@ -8,6 +8,27 @@
 <meta name="description" content="Mini Karaoke official project website. Download the latest Android APK, read release notes and learn about the project.">
 <title>Mini Karaoke | Official Project Website</title>
 <link rel="stylesheet" href="style.css">
+<style>
+.author-name {
+  display: inline-block;
+  font-weight: 700;
+  background: linear-gradient(90deg, #00e5ff, #8b5cf6, #ff4fd8, #ffd166, #00e5ff);
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: authorRainbow 5s linear infinite;
+  filter: drop-shadow(0 0 5px rgba(0, 229, 255, .28));
+}
+@keyframes authorRainbow {
+  from { background-position: 0% 50%; }
+  to { background-position: 250% 50%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .author-name { animation: none; background-position: 50% 50%; }
+}
+</style>
 </head>
 <body>
 <div class="wrap">
